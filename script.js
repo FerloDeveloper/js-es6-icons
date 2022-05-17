@@ -156,7 +156,7 @@ allIcon.forEach((elm) => {
             <i class="fa-solid ${elm.prefix}${elm.name}"></i>
         </div>
         <div class="icon-text">
-            <h2>${elm.name}</h2>
+            <h4>${elm.name}</h4>
         </div>
     </div>
     `;
