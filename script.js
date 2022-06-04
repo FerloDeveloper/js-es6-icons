@@ -13,10 +13,7 @@
 // Dopodiché, basandoci sul codice di riferimento nel sito di Font Awesome, analizziamo come è formato il tag <i> di un'icona qualsiasi, in particolare focalizziamoci sulle classi.
 // Come possiamo usare i dati presenti nella nostra struttura dati per creare l'elemento html nel modo corretto e visualizzare l'icona in pagina?
 
-
-
-const allIcon = [
-
+const icons = [
 	{
 		name: 'cat',
 		prefix: 'fa-',
@@ -24,7 +21,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'orange'
 	},
-
 	{
 		name: 'crow',
 		prefix: 'fa-',
@@ -32,7 +28,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'orange'
 	},
-
 	{
 		name: 'dog',
 		prefix: 'fa-',
@@ -40,7 +35,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'orange'
 	},
-
 	{
 		name: 'dove',
 		prefix: 'fa-',
@@ -48,7 +42,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'orange'
 	},
-
 	{
 		name: 'dragon',
 		prefix: 'fa-',
@@ -56,7 +49,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'orange'
 	},
-
 	{
 		name: 'horse',
 		prefix: 'fa-',
@@ -64,7 +56,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'orange'
 	},
-
 	{
 		name: 'hippo',
 		prefix: 'fa-',
@@ -72,7 +63,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'orange'
 	},
-
 	{
 		name: 'fish',
 		prefix: 'fa-',
@@ -80,7 +70,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'orange'
 	},
-
 	{
 		name: 'carrot',
 		prefix: 'fa-',
@@ -88,7 +77,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'green'
 	},
-
 	{
 		name: 'apple-alt',
 		prefix: 'fa-',
@@ -96,7 +84,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'green'
 	},
-
 	{
 		name: 'lemon',
 		prefix: 'fa-',
@@ -104,7 +91,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'green'
 	},
-
 	{
 		name: 'pepper-hot',
 		prefix: 'fa-',
@@ -112,7 +98,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'green'
 	},
-
 	{
 		name: 'user-astronaut',
 		prefix: 'fa-',
@@ -120,7 +105,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'blue'
 	},
-
 	{
 		name: 'user-graduate',
 		prefix: 'fa-',
@@ -128,7 +112,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'blue'
 	},
-
 	{
 		name: 'user-ninja',
 		prefix: 'fa-',
@@ -136,7 +119,6 @@ const allIcon = [
 		family: 'fas',
 		color: 'blue'
 	},
-
 	{
 		name: 'user-secret',
 		prefix: 'fa-',
@@ -146,19 +128,26 @@ const allIcon = [
 	}
 ];
 
-const container = document.querySelector(".container");
+function printIcon(container, object) {
+    const icon = document.querySelector("#tpl-icon").content.cloneNode(true);
+	icon.querySelector(".box i").classList.add(object.family, object.prefix + object.name);
+	icon.querySelector(".box i").style.color = object.color;
+	icon.querySelector(".name").innerHTML = object.name;
+	container.append(icon);
+}
 
-allIcon.forEach((elm) => {
+const iconContainer = document.querySelector(".container");
 
-    icon =`
-    <div class="icon">
-        <div class="card-icon ${elm.color}">
-            <i class="fa-solid ${elm.prefix}${elm.name}"></i>
-        </div>
-        <div class="icon-text">
-            <h4>${elm.name}</h4>
-        </div>
-    </div>
-    `;
-    container.innerHTML += icon;
-});
+icons.forEach((elm) => printIcon(iconContainer, elm));
+
+const selectElement = document.querySelector("#typo");
+
+selectElement.addEventListener('change', 
+
+	function () {
+		
+		let iconsFiltered = icons.filter(elm => elm.type === selectElement.value || selectElement.value==="all");
+		iconContainer.innerHTML = " ";
+		iconsFiltered.forEach((elm) => printIcon(iconContainer, elm));
+	}
+);
